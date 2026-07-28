@@ -1,7 +1,5 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        int prefix=0;
-        int postfix=0;
         int[] result=new int[nums.length];
         Arrays.fill(result,1);
         int pre=1;
