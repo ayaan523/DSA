@@ -1,42 +1,36 @@
-import java.util.Stack;
 
 class Solution {
+
     public boolean isValid(String s) {
-        Stack<Character> ele = new Stack<>();
+
+        Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < s.length(); i++) {
 
             char ch = s.charAt(i);
 
-            // Opening bracket → push
-            if (ch == '{' || ch == '(' || ch == '[') {
-                ele.push(ch);
-            }
+            if (ch == '(' || ch == '[' || ch == '{') {
 
-            // Closing bracket
-            else {
+                stack.push(ch);
 
-                // Nothing available to match
-                if (ele.isEmpty()) {
+            } else {
+
+                if (stack.isEmpty()) {
                     return false;
                 }
 
-                // Check whether top matches closing bracket
-                if (ele.peek() == '{' && ch == '}') {
-                    ele.pop();
-                }
-                else if (ele.peek() == '[' && ch == ']') {
-                    ele.pop();
-                }
-                else if (ele.peek() == '(' && ch == ')') {
-                    ele.pop();
-                }
-                else {
+                if (ch == ')' && stack.peek() == '(') {
+                    stack.pop();
+                } else if (ch == ']' && stack.peek() == '[') {
+                    stack.pop();
+                } else if (ch == '}' && stack.peek() == '{') {
+                    stack.pop();
+                } else {
                     return false;
                 }
             }
         }
 
-        return ele.isEmpty();
+        return stack.isEmpty();
     }
 }
